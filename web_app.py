@@ -71,6 +71,8 @@ st.markdown(
         background-size: cover;
     }
     .stApp {
+        max-width: 1200px;  /* Set maximum width for the content */
+        margin: auto;  /* Center the content */
         color: #fff;  /* Set text color to white */
     }
     </style>
@@ -81,7 +83,7 @@ st.markdown(
 # Sidebar menu
 selected_option = st.sidebar.selectbox("Select Tracking Mode", ["About US","Live Impression Tracking", "Manual Impression Tracking"])
 
-st.image("https://github.com/Drupad-DeV/Insta_Metrics/assets/100958162/3733d8a0-a1a6-4af9-9224-b7d0903b73a1", width=800)
+st.image("https://github.com/Drupad-DeV/Insta_Metrics/assets/100958162/3733d8a0-a1a6-4af9-9224-b7d0903b73a1", use_container_width=True)
 
 
 
