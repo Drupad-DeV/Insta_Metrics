@@ -5,6 +5,7 @@ from sklearn.linear_model import PassiveAggressiveRegressor, LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import classification_report, roc_auc_score
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error, precision_score
+import matplotlib.pyplot as plt
 import streamlit as st
 import warnings
 
@@ -114,4 +115,81 @@ else:
     # Add content for advanced analytics (customize as needed)
     st.title('InstaMetrics Predictor')
     st.subheader('Predict Instagram Impressions')
-    st.subheader('Ippo Kittile Harin aee??')
+    st.write(
+        """
+        Welcome to Your Streamlit App, where we understand the dynamic landscape of social media, especially Instagram. 
+        As a content creator, staying ahead of changes is crucial for sustained success on this platform. Our mission is to 
+        empower you with the tools to adapt and thrive in the ever-evolving world of Instagram. Whether you're promoting 
+        your business, building a portfolio, or expressing your creativity through content, our Instagram Reach Analysis 
+        using Python provides valuable insights. Explore how data science can help you understand and navigate Instagram's 
+        changes, allowing you to optimize your reach and performance in the long run. Join us in this journey of data-driven 
+        success on Instagram.
+        """
+    )
+
+    st.subheader('Models Used: ')
+    
+    st.markdown("We employed a diverse set of machine learning models in our analysis, each chosen for its specific strengths and capabilities. "
+             "The models include <strong style='color:red;'>Passive Aggressive Regression</strong>, known for its adaptability to changing "
+             "data streams, <strong style='color:red;'>Multi Linear Regression</strong>, which explores linear relationships among multiple "
+             "features, and <strong style='color:red;'>Random Forest</strong>, a versatile ensemble method. Each model underwent rigorous "
+             "testing and tuning to ensure optimal performance in predicting Instagram impressions.", unsafe_allow_html=True)
+
+    st.markdown("<strong style='color:red;'>Passive Aggressive Regression</strong> excels in scenarios where data distribution may change over time, "
+             "making it suitable for dynamic social media platforms like Instagram. <strong style='color:red;'>Multi Linear Regression</strong>, "
+             "on the other hand, provides insights into how different features collectively influence impression metrics. The "
+             "<strong style='color:red;'>Random Forest</strong> model, being an ensemble of decision trees, brings robustness and the ability "
+             "to capture non-linear relationships within the data.", unsafe_allow_html=True)
+
+    st.markdown("Our approach involves leveraging the strengths of each model to create a more comprehensive understanding of Instagram reach dynamics. "
+             "By combining the predictive power of these models, we aim to assist content creators in making informed decisions to enhance the "
+             "effectiveness of their Instagram content strategy.", unsafe_allow_html=True)
+
+    st.subheader('Model Scores: ')
+    # Model Scores (Pie Chart)
+    models = ['Passive Aggressive', 'Multi Linear', 'Random Forest']
+
+    rmse_scores = [par_r2, mlr_r2, rfr_r2]
+    mae_scores = [par_mae, mlr_mae, rfr_mae]
+    mse_scores = [par_mse, mlr_mse, rfr_mse]
+    accuracy_scores = [par_ac, mlr_ac, rfr_ac]
+
+    scores = [
+    rmse_scores,  # Replace with your actual scores for Model 1
+    mae_scores,  # Replace with your actual scores for Model 2
+    mse_scores,  # Replace with your actual scores for Model 3
+    accuracy_scores,  # Replace with your actual scores for Model 4
+]
+
+   # Create subplots
+    fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+
+    # Plotting Pie Charts
+    for i in range(2):
+        for j in range(2):
+            ax = axes[i, j]
+            model_index = i * 2 + j
+            ax.pie(scores[model_index], labels=models, autopct='%1.1f%%',
+                colors=['skyblue', 'lightgreen', 'lightcoral'], startangle=90)
+            ax.set_title(f'Model {model_index + 1} Scores')
+
+    # Adjust layout
+    plt.tight_layout()
+
+    # Display Subplots using Streamlit
+    st.pyplot(fig)
+
+    # Display Table with Scores
+    st.markdown("## Model Scores Table")
+
+    # Create a table
+    score_table_data = {
+        'Model': models,
+        'R2 Score': rmse_scores,
+        'MAE': mae_scores,
+        'MSE': mse_scores,
+        'Accuracy': accuracy_scores
+}
+
+    # Display the table
+    st.table(score_table_data)
