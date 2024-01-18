@@ -82,7 +82,7 @@ st.markdown(
 )
 
 # Sidebar menu
-selected_option = st.sidebar.selectbox("Select Tracking Mode", ["About US","Live Impression Tracking", "Manual Impression Tracking"])
+selected_option = st.sidebar.selectbox("Select Tracking Mode", ["About US","Manual Impression Tracking"])
 
 st.image("https://github.com/Drupad-DeV/Insta_Metrics/assets/100958162/3733d8a0-a1a6-4af9-9224-b7d0903b73a1")
 
@@ -90,10 +90,7 @@ st.image("https://github.com/Drupad-DeV/Insta_Metrics/assets/100958162/3733d8a0-
 
 
 # Display content based on selected option
-if selected_option == "Live Impression Tracking":
-    # Add content for live tracking (leave as is)
-    st.write("Live Impression Tracking Content Goes Here")
-elif selected_option == "Manual Impression Tracking":
+if selected_option == "Manual Impression Tracking":
     likes = st.slider('Likes:', min_value=0, max_value=1000, value=500)
     saves = st.slider('Saves:', min_value=0, max_value=1000, value=250)
     comments = st.slider('Comments:', min_value=0, max_value=100, value=25)
@@ -108,9 +105,10 @@ elif selected_option == "Manual Impression Tracking":
 
     # Display predictions
     st.subheader('Predictions:')
-    st.write(f'Passive Aggressive Regressor Prediction: {prediction_pa[0]:,.2f} Impressions')
-    st.write(f'Random Forest Regressor Prediction: {prediction_rf[0]:,.2f} Impressions')
-    st.write(f'Linear Regression Prediction: {prediction_mlr[0]:,.2f} Impressions')
+    st.markdown(f'<h3>Passive Aggressive Regressor Prediction: </h3><h2 style="color:blue;">{prediction_pa[0]:,.2f} Impressions</h2>', unsafe_allow_html=True)
+    st.markdown(f'<h3>Random Forest Regressor Prediction: </h3><h2 style="color:green;"> {prediction_rf[0]:,.2f} Impressions</h2>', unsafe_allow_html=True)
+    st.markdown(f'<h3>Linear Regression Prediction:</h3><h2 style="color:red;"> {prediction_mlr[0]:,.2f} Impressions</h2>', unsafe_allow_html=True)
+
 else:
     # Add content for advanced analytics (customize as needed)
     st.title('InstaMetrics Predictor')
@@ -175,6 +173,7 @@ else:
             fig, ax = plt.subplots(figsize=(8, 8))
             ax.pie(scores[i], labels=models, autopct='%1.1f%%', colors=colors, startangle=90)
             ax.set_title(f'Pie Chart of {score_type} Scores')
+            
             st.pyplot(fig)
 
  
