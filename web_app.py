@@ -146,6 +146,7 @@ else:
              "effectiveness of their Instagram content strategy.", unsafe_allow_html=True)
 
     st.subheader('Model Scores: ')
+    
     # Model Scores (Pie Chart)
     models = ['Passive Aggressive', 'Multi Linear', 'Random Forest']
 
@@ -159,26 +160,26 @@ else:
     mae_scores,  # Replace with your actual scores for Model 2
     mse_scores,  # Replace with your actual scores for Model 3
     accuracy_scores,  # Replace with your actual scores for Model 4
-]
+    ]
 
-   # Create subplots
-    fig, axes = plt.subplots(2, 2, figsize=(12, 10))
 
-    # Plotting Pie Charts
-    for i in range(2):
-        for j in range(2):
-            ax = axes[i, j]
-            model_index = i * 2 + j
-            ax.pie(scores[model_index], labels=models, autopct='%1.1f%%',
-                colors=['skyblue', 'lightgreen', 'lightcoral'], startangle=90)
-            ax.set_title(f'Model {model_index + 1} Scores')
+    colors = ['skyblue', 'lightgreen', 'lightcoral']
 
-    # Adjust layout
-    plt.tight_layout()
+    # Create a 2x2 grid of columns
+    col1, col2 = st.columns(2)
 
-    # Display Subplots using Streamlit
-    st.pyplot(fig)
+    # Display 2x2 table with pie charts
+    for i, score_type in enumerate(['R2', 'MAE', 'MSE', 'Accuracy']):
+        with col1 if i % 2 == 0 else col2:
+            st.subheader(f'Pie Chart of {score_type} Scores')
+            fig, ax = plt.subplots(figsize=(8, 8))
+            ax.pie(scores[i], labels=models, autopct='%1.1f%%', colors=colors, startangle=90)
+            ax.set_title(f'Pie Chart of {score_type} Scores')
+            st.pyplot(fig)
 
+ 
+
+    
     # Display Table with Scores
     st.markdown("## Model Scores Table")
 
@@ -189,7 +190,7 @@ else:
         'MAE': mae_scores,
         'MSE': mse_scores,
         'Accuracy': accuracy_scores
-}
+        }
 
     # Display the table
     st.table(score_table_data)
