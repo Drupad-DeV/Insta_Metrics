@@ -1,2 +1,2 @@
-# Insta_Metrics
+# Instagram Reach Predictor
 An advanced project predicting Instagram post impressions using machine learning. Employing Multilinear Regression, Passive Aggressive Regression, and Random Forest, the model assesses features like likes, saves, comments, shares, profile visits, and follows.
